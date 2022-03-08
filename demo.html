@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.2/umd/react.profiling.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.2/umd/react-dom.profiling.min.js"></script>
+    <script type="text/javascript">
+      const h = React.createElement;
+      class Child extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            count: 0,
+          };
+        }
+        add() {
+          this.setState({ count: this.state.count + 1 });
+        }
+
+        render() {
+          const { name } = this.props;
+          return h("div", { className: "child-container" }, [
+            h(
+              "button",
+              {
+                onClick: () => this.add(),
+              },
+              "Click Me"
+            ),
+            h("span", null, ['Count: ', this.state.count]),
+            h("div", null, `prop "name" from App is: ${name}`),
+          ]);
+        }
+      }
+      function App() {
+        const [name, setName] = React.useState("");
+        return h("div", {}, [
+          h("h1", { className: "title1" }, [
+            h("div", null, 123),
+            h("div", null, 456),
+            h("input", {
+              placeholder: "请输入name",
+              onInput: (event) => {
+                setName(event.target.value);
+              },
+            }),
+          ]),
+          h(Child, { name }),
+        ]);
+      }
+
+      ReactDOM.render(h(App, null), document.getElementById("app"));
+    </script>
+  </body>
+</html>
