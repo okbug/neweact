@@ -1,4 +1,6 @@
-nothing
+最简React项目模板
+可以支持JSX写法
+没有过多的配置
 
 ```shell
 # 创建新目录
